@@ -1,4 +1,9 @@
 <?php
 
-
-include 'view/about-us.php';
+class AboutController extends Controller
+{
+  function indexAction()
+  {
+    include 'view/about-us.php';
+  }
+}
