@@ -4,6 +4,10 @@ class AboutController extends Controller
 {
   function indexAction()
   {
-    include 'view/about-us.php';
+    $variables['title']   = 'About Page Title';
+    $variables['content'] = 'About Page Content';
+
+    $template = new Template('default');
+    $template->view('static-page', $variables);
   }
 }

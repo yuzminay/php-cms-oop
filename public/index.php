@@ -1,5 +1,11 @@
 <?php
-require_once 'src/Controller.php';
+session_start();
+
+define('ROOT_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+define('VIEW_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR);
+
+require_once ROOT_PATH . 'src/Controller.php';
+require_once ROOT_PATH . 'src/Template.php';
 
 $section = $_GET['section'] ?? $_POST['section'] ?? 'home';
 $action = $_GET['action'] ?? $_POST['action'] ?? 'index';
@@ -8,14 +14,16 @@ $action = $_GET['action'] ?? $_POST['action'] ?? 'index';
 
 if ($section == 'about-us') {
 
-  include_once 'controller/aboutUsController.php';
+  include_once ROOT_PATH . 'controller/aboutUsController.php';
   $aboutContoller = new AboutController();
   $aboutContoller->runAction($action);
 } else if ($section == 'contact-us') {
 
-  include_once 'controller/contactUsController.php';
+  include_once ROOT_PATH . 'controller/contactUsController.php';
   $contactController = new ContactController();
   $contactController->runAction($action);
 } else {
-  include_once 'controller/homeController.php';
+  include_once ROOT_PATH . 'controller/homeController.php';
+  $homeController = new HomeController();
+  $homeController->runAction($action);
 }
