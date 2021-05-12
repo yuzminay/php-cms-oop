@@ -25,11 +25,21 @@ $router->findBy('pretty_url', $action);
 
 $action = $router->action ?? 'index';
 
-if ($router->module == 'page') {
-
-  include_once ROOT_PATH . 'controller/PageController.php';
+$moduleName = ucfirst($router->module) . 'Controller';
+echo (ROOT_PATH . 'controller/' . $moduleName . '.php');
+if (file_exists(ROOT_PATH . 'controller/' . $moduleName . '.php')) {
+  include ROOT_PATH . 'controller/' . $moduleName . '.php';
   $pageController = new PageController();
   $pageController->setEntitiyId($router->entity_id);
 
   $pageController->runAction($action);
 }
+
+  // if ($router->module == 'page') {
+
+  //   include_once ROOT_PATH . 'controller/PageController.php';
+  //   $pageController = new PageController();
+  //   $pageController->setEntitiyId($router->entity_id);
+
+  //   $pageController->runAction($action);
+  // }
