@@ -7,27 +7,29 @@ define('VIEW_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR . 'view' . DIRECTORY
 require_once ROOT_PATH . 'src/Controller.php';
 require_once ROOT_PATH . 'src/Template.php';
 require_once ROOT_PATH . 'src/DatabaseConnection.php';
+require_once ROOT_PATH . 'src/Entity.php';
+require_once ROOT_PATH . 'src/Router.php';
 require_once ROOT_PATH . 'model/Page.php';
 
 DatabaseConnection::connect('localhost', 'php-cms-oop', 'samir', 'Samir123@');
 
-$section = $_GET['section'] ?? $_POST['section'] ?? 'home';
-$action = $_GET['action'] ?? $_POST['action'] ?? 'index';
+// $section = $_GET['section'] ?? $_POST['section'] ?? 'home';
+// $action = $_GET['action'] ?? $_POST['action'] ?? 'index';
+$action = $_GET['seo_name'] ?? 'home';
 
+$dbh = DatabaseConnection::getInstance();
+$dbc = $dbh->getConnection();
 
+$router = new Router($dbc);
+$router->findBy('pretty_url', $action);
 
-if ($section == 'about-us') {
+$action = $router->action ?? 'index';
 
-  include_once ROOT_PATH . 'controller/aboutUsController.php';
-  $aboutContoller = new AboutController();
-  $aboutContoller->runAction($action);
-} else if ($section == 'contact-us') {
+if ($router->module == 'page') {
 
-  include_once ROOT_PATH . 'controller/contactUsController.php';
-  $contactController = new ContactController();
-  $contactController->runAction($action);
-} else {
-  include_once ROOT_PATH . 'controller/homeController.php';
-  $homeController = new HomeController();
-  $homeController->runAction($action);
+  include_once ROOT_PATH . 'controller/PageController.php';
+  $pageController = new PageController();
+  $pageController->setEntitiyId($router->entity_id);
+
+  $pageController->runAction($action);
 }

@@ -1,17 +1,15 @@
 <?php
 
-class HomeController extends Controller
+class PageController extends Controller
 {
   function indexAction()
   {
-
     $dbh = DatabaseConnection::getInstance();
     $dbc = $dbh->getConnection();
 
     $pageObj = new Page($dbc);
-    $pageObj->findById(1);
+    $pageObj->findBy('id', $this->entityId);
     $variables['pageObj'] = $pageObj;
-
 
     $template = new Template('default');
     $template->view('static-page', $variables);

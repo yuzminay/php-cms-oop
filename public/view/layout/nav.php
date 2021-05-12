@@ -10,10 +10,10 @@
           <a class="nav-link active" aria-current="page" href="http://php-cms-oop.test/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="http://php-cms-oop.test/?section=about-us&action=index">About Us</a>
+          <a class="nav-link" href="http://php-cms-oop.test/?seo_name=about_us">About Us</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="http://php-cms-oop.test/?section=contact-us&action=index" tabindex="-1">Contact Us</a>
+          <a class="nav-link" href="http://php-cms-oop.test/?seo_name=contact_us" tabindex="-1">Contact Us</a>
         </li>
       </ul>
       <form class="d-flex">
