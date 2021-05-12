@@ -47,10 +47,10 @@
 
 <body>
 
-  <?php include VIEW_PATH . 'layout/nav.php'; ?>
+  <?php include ROOT_PATH . 'view/' . 'layout/nav.php'; ?>
 
   <main class="container">
-    <?php include 'view/' . $template . '.php' ?>
+    <?php include VIEW_PATH . $template . '.php' ?>
   </main>
 
 

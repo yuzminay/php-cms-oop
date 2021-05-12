@@ -1,10 +1,19 @@
 <?php
 
-class Entity
+abstract class Entity
 {
   protected $tableName;
   protected $fields;
   protected $dbc;
+
+  abstract protected function initFields();
+
+  protected function __construct($dbc, $tableName)
+  {
+    $this->dbc       = $dbc;
+    $this->tableName = $tableName;
+    $this->initFields();
+  }
 
   public function findBy($fieldName, $fieldValue)
   {

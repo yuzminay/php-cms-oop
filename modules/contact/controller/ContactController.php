@@ -1,9 +1,11 @@
 <?php
 
 class ContactController extends Controller
+
 {
   function runBeforeAction()
   {
+
     if ($_SESSION['has_submitted_the_form'] ?? 0 == 1) {
 
       $dbh = DatabaseConnection::getInstance();
@@ -14,14 +16,13 @@ class ContactController extends Controller
       $variables['pageObj'] = $pageObj;
 
       $template = new Template('default');
-      $template->view('contact/contact-us-contacted', $variables);
+      $template->view('contact-us-contacted', $variables);
       return false;
     }
     return true;
   }
   function indexAction()
   {
-
     $dbh = DatabaseConnection::getInstance();
     $dbc = $dbh->getConnection();
 
@@ -30,7 +31,7 @@ class ContactController extends Controller
     $variables['pageObj'] = $pageObj;
 
     $template = new Template('default');
-    $template->view('contact/contact-us', $variables);
+    $template->view('contact-us', $variables);
   }
   function submitAction()
   {
@@ -47,6 +48,6 @@ class ContactController extends Controller
     $variables['pageObj'] = $pageObj;
 
     $template = new Template('default');
-    $template->view('contact/contact-us-thank-you', $variables);
+    $template->view('contact-us-thank-you', $variables);
   }
 }
