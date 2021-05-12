@@ -5,16 +5,13 @@
         <form action="index.php" method="post">
           <input type="hidden" name="section" value="contact-us" />
           <input type="hidden" name="action" value="submit" />
+          <?= $pageObj->title ?>
           <div class="row">
             <div class="col-md-6">
               <div class="form-group">
                 <label for="name">
                   Name</label>
                 <input type="text" class="form-control" id="name" placeholder="Enter name" required="required" />
-              </div>
-              <div class="form-group">
-                <label for="email">
-                  Email Address</label>
               </div>
               <div class="col-md-6">
                 <div class="form-group">

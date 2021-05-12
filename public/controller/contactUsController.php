@@ -5,8 +5,13 @@ class ContactController extends Controller
   function runBeforeAction()
   {
     if ($_SESSION['has_submitted_the_form'] ?? 0 == 1) {
-      $variables['title']   = 'Contact Page Title';
-      $variables['content'] = 'Contact Page Content';
+
+      $dbh = DatabaseConnection::getInstance();
+      $dbc = $dbh->getConnection();
+
+      $pageObj = new Page($dbc);
+      $pageObj->findById(3);
+      $variables['pageObj'] = $pageObj;
 
       $template = new Template('default');
       $template->view('contact/contact-us-contacted', $variables);
@@ -17,8 +22,12 @@ class ContactController extends Controller
   function indexAction()
   {
 
-    $variables['title']   = 'Contact Page Title';
-    $variables['content'] = 'Contact Page Content';
+    $dbh = DatabaseConnection::getInstance();
+    $dbc = $dbh->getConnection();
+
+    $pageObj = new Page($dbc);
+    $pageObj->findById(3);
+    $variables['pageObj'] = $pageObj;
 
     $template = new Template('default');
     $template->view('contact/contact-us', $variables);
@@ -28,8 +37,14 @@ class ContactController extends Controller
     //store data
     //send email
     $_SESSION['has_submitted_the_form'] = 1;
-    $variables['title']   = 'Contact Page Title';
-    $variables['content'] = 'Contact Page Content';
+
+    $dbh = DatabaseConnection::getInstance();
+    $dbc = $dbh->getConnection();
+
+    $pageObj = new Page($dbc);
+    $pageObj->findById(3);
+
+    $variables['pageObj'] = $pageObj;
 
     $template = new Template('default');
     $template->view('contact/contact-us-thank-you', $variables);
