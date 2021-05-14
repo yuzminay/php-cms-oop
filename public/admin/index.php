@@ -19,6 +19,7 @@ DatabaseConnection::connect('localhost', 'php-cms-oop', 'samir', 'Samir123@');
 $action = $_GET['seo_name'] ?? 'home';
 
 $dbh = DatabaseConnection::getInstance();
+
 $dbc = $dbh->getConnection();
 
 $router = new Router($dbc);
