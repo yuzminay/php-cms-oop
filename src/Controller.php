@@ -1,29 +1,28 @@
 <?php
 
-class Controller
-{
+class Controller {
+    
+    protected $entityId;
+    public $template;
 
-  protected $entityId;
-
-  public function runAction($actionName)
-  {
-    if (method_exists($this, 'runBeforeAction')) {
-      $result = $this->runBeforeAction();
-      if ($result == false) {
-        return;
-      }
+    public function runAction($actionName) {
+        if(method_exists($this, 'runBeforeAction')){
+            $result = $this->runBeforeAction();
+            if($result == false) {
+                return;
+            }
+        }
+        
+        $actionName .= 'Action';
+        if (method_exists($this, $actionName)){
+            $this->$actionName();
+        } else {
+            include 'view/status-pages/404.html';
+        }
+        
     }
-
-    $actionName .= 'Action';
-    if (method_exists($this, $actionName)) {
-      $this->$actionName();
-    } else {
-      include_once 'view/status-page/404.php';
+    
+    public function setEntityId($entityId) {
+        $this->entityId = $entityId;
     }
-  }
-
-  public function setEntitiyId($entityId)
-  {
-    $this->entityId = $entityId;
-  }
 }

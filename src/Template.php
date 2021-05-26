@@ -1,19 +1,15 @@
 <?php
 
-class Template
-{
-  private   $layout;
-  protected $insideChildren;
-  public    $accessFromEveryWhere;
+class Template {
+    private $layout;
+    
+    public function __construct($layout) {
+        $this->layout = $layout;
+    }
 
-  public function __construct($layout)
-  {
-    $this->layout = $layout;
-  }
-  function view($template, $variables)
-  {
-    extract($variables);
 
-    include ROOT_PATH . 'view/layout/' . $this->layout . '.php';
-  }
+    function view($template, $variables){
+        extract($variables);
+        include VIEW_PATH . $this->layout .  '.html';  
+    }
 }

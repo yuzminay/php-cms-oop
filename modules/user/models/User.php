@@ -1,19 +1,19 @@
 <?php
 
-class Router extends Entity {
+class User extends Entity {
     
     public function __construct($dbc) {
-        parent::__construct($dbc, 'routes');
+        parent::__construct($dbc, 'users');
         
     }
     protected function initFields() {
         
         $this->fields = [
             'id',
-            'module',
-            'action',
-            'entity_id',
-            'pretty_url'
+            'name',
+            'username',
+            'password',
+            'password_hash'
             
         ];
     }
